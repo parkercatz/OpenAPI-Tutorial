@@ -1,15 +1,21 @@
+# 口コミサイトAPIのメタデータ
+
 openapi: '3.0.3'
 
 info:
-  title: 'Sample API'
+  title: 'Shop Review API'
+  description: |
+    # Features
+    - Get reviews
+    - Post review
+  termsOfService: 'https://www.shopreview.com/terms'
+  contact:
+    name: 'Customer Support'
+    url: 'https://www.shopreview.com/support/'
+    email: 'support-desk@shopreview.com'
+  license:
+    name: 'MIT License'
+    url: 'https://opensource.org/license/MIT'
   version: '1.0.0'
 
-servers: []
-
-tags: []
-
 paths: {}
-
-security: []
-
-components: []
