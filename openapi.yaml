@@ -1,9 +1,19 @@
 # レビュー情報投稿APIの作成
 # POST /shops/{shopId}/reviews
-# 投稿データ
+
+# 201番
+# locationヘッダーで新しいURLを通知
+
+# 400番
+# エラー詳細をレスポンスボディに表現
 # {
-#   score: 3,
-#   comment: "Delicious"
+#   code: "1234",
+#   type: "InvalidDataFormat"
+#   message: "Invalid data"
+#   errors: [{
+#     field: "comment",
+#     code: "1234-001"
+#   }]
 # }
 
 openapi: '3.0.3'
@@ -34,3 +44,24 @@ paths:
       responses:
         '201':
           description: 'Success operation'
+          headers:
+            location:
+              description: 'New URL of created review'
+              schema: { type: string, format: url }
+        '400':
+          description: 'Client side error'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code: { type: string }
+                  type: { type: string }
+                  message: { type: string }
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field: { type: string }
+                        code: { type: string }
