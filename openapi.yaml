@@ -1,5 +1,10 @@
 # レビュー情報投稿APIの作成
 # POST /shops/{shopId}/reviews
+# 投稿データ
+# {
+#   score: 3,
+#   comment: "Delicious"
+# }
 
 openapi: '3.0.3'
 
@@ -10,23 +15,22 @@ info:
 paths:
   '/shops/{shopId}/reviews':
     post:
-      summary: 'Create reviews'
+      summary: 'Create review'
       parameters:
         - name: shopId
           in: path
           required: true
           schema: { type: string }
-          example: 'abcdefg'
-        - name: X-Api-Key
-          in: header
-          description: "Request user's identifier"
-          schema: { type: string }
-          example: 'xxxx-xxxx-xxxx-xxxx'
-        - name: token
-          in: cookie
-          description: "One time token"
-          schema: { type: string }
-          example: 'xxxx-xxxx-xxxx-xxxx'
-        responses: 
-          "201":
-            description: "Success operation"
+      requestBody:
+        description: 'Contents of review'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score: { type: integer, example: 3 }
+                comment: { type: string, example: 'Delicious' }
+      responses:
+        '201':
+          description: 'Success operation'
