@@ -1,5 +1,5 @@
-# レビュー情報取得APIの作成
-# GET /shops/{shopId}/reviews
+# レビュー情報投稿APIの作成
+# POST /shops/{shopId}/reviews
 
 openapi: '3.0.3'
 
@@ -9,16 +9,24 @@ info:
 
 paths:
   '/shops/{shopId}/reviews':
-    get:
-      summary: 'Get specified shop reviews'
-      description: '(description): Get specified shop reviews'
-      tags: ['shops']
-      deprecated: false
+    post:
+      summary: 'Create reviews'
       parameters:
         - name: shopId
           in: path
           required: true
           schema: { type: string }
-      responses:
-        '200':
-          description: 'Success operation'
+          example: 'abcdefg'
+        - name: X-Api-Key
+          in: header
+          description: "Request user's identifier"
+          schema: { type: string }
+          example: 'xxxx-xxxx-xxxx-xxxx'
+        - name: token
+          in: cookie
+          description: "One time token"
+          schema: { type: string }
+          example: 'xxxx-xxxx-xxxx-xxxx'
+        responses: 
+          "201":
+            description: "Success operation"
