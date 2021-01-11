@@ -1,21 +1,21 @@
-# 口コミサイトAPIのメタデータ
-
 openapi: '3.0.3'
 
 info:
   title: 'Shop Review API'
-  description: |
-    # Features
-    - Get reviews
-    - Post review
-  termsOfService: 'https://www.shopreview.com/terms'
-  contact:
-    name: 'Customer Support'
-    url: 'https://www.shopreview.com/support/'
-    email: 'support-desk@shopreview.com'
-  license:
-    name: 'MIT License'
-    url: 'https://opensource.org/license/MIT'
   version: '1.0.0'
+
+servers:
+  - url: 'http://localhost:{port}'
+    description: 'Local development'
+    variables:
+      port:
+        enum: ['3000', '8000']
+        default: '3000'
+  - url: 'https://it1.shopreview.com'
+    description: 'Integration Test'
+  - url: 'https://stg.shopreview.com'
+    description: 'Staging Test'
+  - url: 'https://api.shopreview.com'
+    description: 'Production'
 
 paths: {}
