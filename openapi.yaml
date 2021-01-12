@@ -1,13 +1,11 @@
-# レビュー取得/投稿APIの作成
+# レビュー投稿APIの作成
 
 # 作成するAPI
 # GET /shops/{shopId}/reviews
 # POST /shops/{shopId}/reviews
 
-# 共通化するコンポーネント
-# schema - Review, ClientError
-# parameters - shopId
-# responses - 400-BadRequest
+# 必要とするセキュリティ要件
+# POSTする際にAPIKeyを必要とすること
 
 openapi: '3.0.3'
 
@@ -62,6 +60,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Review'
+      security: []
     post:
       summary: 'Create new review'
       description: "Create specified shop's new review"
@@ -84,6 +83,9 @@ paths:
               schema: { type: string, format: url }
         '400':
           $ref: '#/components/responses/400-BadRequest'
+
+security:
+  - apikey_auth: [0]
 
 components:
   schemas:
@@ -119,3 +121,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ClientError'
+  securitySchemes:
+    apikey_auth:
+      description: 'API Key authorization'
+      type: apiKey
+      in: header
+      name: 'X-Api-Key'
