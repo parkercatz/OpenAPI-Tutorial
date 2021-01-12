@@ -1,15 +1,11 @@
-# サンプルSchemaの作成
+# レビュー取得/投稿APIの作成
 
-# {
-#   shop: {
-#     name: "Sample Cafe",
-#     place: "xxxx"
-#   },
-#   reviews: [{
-#     score: 3
-#     comment: "Delicious!"
-#   }]
-# }
+# 作成するAPI
+# GET /shops/{shopId}/reviews
+# POST /shops/{shopId}/reviews
+
+# 付与するタグ
+# reviews
 
 openapi: '3.0.3'
 
@@ -17,25 +13,26 @@ info:
   title: 'Shop Review API'
   version: '1.0.0'
 
-paths: {}
+tags:
+  - name: reviews
+    description: 'Shop reviews operation'
 
-components:
-  schemas:
-    SampleObject:
-      type: object
-      properties:
-        shop:
-          type: object
-          properties:
-            name: { type: string }
-            place: { type: string }
-        reviews:
-          type: array
-          items:
-            type: object
-            properties:
-              score:
-                type: integer
-                enum: [1, 2, 3, 4, 5]
-              comment:
-                type: string
+paths:
+  '/shops/{shopId}/reviews':
+    parameters:
+      - name: shopId
+        in: path
+        required: true
+        schema: { type: string }
+    get:
+      summary: 'Get shop reviews'
+      tags: ['reviews']
+      responses:
+        '200':
+          description: 'Success operation'
+    post:
+      summary: 'Create new review'
+      tags: ['reviews']
+      responses:
+        '201':
+          description: 'Success operation'
