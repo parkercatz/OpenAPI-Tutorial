@@ -1,20 +1,8 @@
-# レビュー情報投稿APIの作成
-# POST /shops/{shopId}/reviews
+# サンプルSchemaの作成
 
-# 201番
-# locationヘッダーで新しいURLを通知
-
-# 400番
-# エラー詳細をレスポンスボディに表現
-# {
-#   code: "1234",
-#   type: "InvalidDataFormat"
-#   message: "Invalid data"
-#   errors: [{
-#     field: "comment",
-#     code: "1234-001"
-#   }]
-# }
+# 0以上10未満の整数
+# null許容する10文字〜20文字の文字列
+# 真偽値
 
 openapi: '3.0.3'
 
@@ -22,46 +10,20 @@ info:
   title: 'Shop Review API'
   version: '1.0.0'
 
-paths:
-  '/shops/{shopId}/reviews':
-    post:
-      summary: 'Create review'
-      parameters:
-        - name: shopId
-          in: path
-          required: true
-          schema: { type: string }
-      requestBody:
-        description: 'Contents of review'
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                score: { type: integer, example: 3 }
-                comment: { type: string, example: 'Delicious' }
-      responses:
-        '201':
-          description: 'Success operation'
-          headers:
-            location:
-              description: 'New URL of created review'
-              schema: { type: string, format: url }
-        '400':
-          description: 'Client side error'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code: { type: string }
-                  type: { type: string }
-                  message: { type: string }
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field: { type: string }
-                        code: { type: string }
+paths: {}
+
+components:
+  schemas:
+    SampleInt:
+      type: integer
+      minimum: 0
+      exclusiveMinimum: false
+      maximum: 100
+      exclusiveMaximum: true
+    SampleString:
+      type: string
+      nullable: true
+      minLength: 10
+      maxLength: 20
+    SampleBoolean:
+      type: boolean
