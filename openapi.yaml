@@ -1,8 +1,15 @@
 # サンプルSchemaの作成
 
-# 0以上10未満の整数
-# null許容する10文字〜20文字の文字列
-# 真偽値
+# {
+#   shop: {
+#     name: "Sample Cafe",
+#     place: "xxxx"
+#   },
+#   reviews: [{
+#     score: 3
+#     comment: "Delicious!"
+#   }]
+# }
 
 openapi: '3.0.3'
 
@@ -14,16 +21,21 @@ paths: {}
 
 components:
   schemas:
-    SampleInt:
-      type: integer
-      minimum: 0
-      exclusiveMinimum: false
-      maximum: 100
-      exclusiveMaximum: true
-    SampleString:
-      type: string
-      nullable: true
-      minLength: 10
-      maxLength: 20
-    SampleBoolean:
-      type: boolean
+    SampleObject:
+      type: object
+      properties:
+        shop:
+          type: object
+          properties:
+            name: { type: string }
+            place: { type: string }
+        reviews:
+          type: array
+          items:
+            type: object
+            properties:
+              score:
+                type: integer
+                enum: [1, 2, 3, 4, 5]
+              comment:
+                type: string
